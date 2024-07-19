@@ -48,7 +48,7 @@ def _load_gender_data(persistent_dir):
     with open(f"{persistent_dir}/data/text/wikipedia-2.5.txt", "r") as f:
         lines = f.readlines()
     random.shuffle(lines)
-
+    print(lines)
     for line in tqdm(lines, desc="Loading INLP data"):
         # Each line contains a paragraph of text.
         sentences = nltk.sent_tokenize(line)

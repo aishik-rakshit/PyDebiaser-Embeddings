@@ -24,12 +24,13 @@ class INLP:
         # self.bias_type = bias_type
         self.n_classifiers = n_classifiers
         self.seed = seed
-        self.bias_types = bias_types
-
+        self.bias_types = [bias_types]
+        self.args = {}
+        self.args['persistent_dir'] = "pydebiaser"
         print("Downloading wikipedia-2.5.txt ....")
         data_dir = self.args['persistent_dir']+"/data/text/"
-        # Path(data_dir).mkdir(parents=True, exist_ok=True)
-        shutil.rmtree(data_dir, ignore_errors=True)
+        Path(data_dir).mkdir(parents=True, exist_ok=True)
+        # shutil.rmtree(data_dir, ignore_errors=True)
         print(os.system("git clone https://huggingface.co/datasets/Daniel-Saeedi/wikipedia "+data_dir))
         print("Done!")
         
@@ -42,7 +43,6 @@ class INLP:
         model = getattr(models, self.model)(self.model_name_or_path)
         model.eval()
         tokenizer = transformers.AutoTokenizer.from_pretrained(self.model_name_or_path)
-
         projection_matrix = compute_projection_matrix(
             model,
             tokenizer,
