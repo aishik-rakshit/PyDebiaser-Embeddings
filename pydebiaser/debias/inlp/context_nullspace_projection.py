@@ -115,9 +115,6 @@ def _extract_binary_features(model, tokenizer, bias_sentences, neutral_sentences
 
 def _split_gender_dataset(male_feat, female_feat, neut_feat):
     np.random.seed(0)
-    print(male_feat.shape)
-    print(female_feat.shape)
-    print(neut_feat.shape)
     X = np.concatenate((male_feat, female_feat, neut_feat), axis=0)
 
     y_male = np.ones(male_feat.shape[0], dtype=int)
@@ -138,7 +135,6 @@ def _split_gender_dataset(male_feat, female_feat, neut_feat):
 
 def _split_binary_dataset(bias_feat, neut_feat):
     np.random.seed(0)
-    print(bias_feat.shape, neut_feat.shape)
     X = np.concatenate((bias_feat, neut_feat), axis=0)
 
     y_bias = np.ones(bias_feat.shape[0], dtype=int)
@@ -187,7 +183,6 @@ def _apply_nullspace_projection(
 
 
 def compute_projection_matrix(model, tokenizer, data, bias_type, n_classifiers=80):
-    print(bias_type)
     """Runs INLP.
 
     Notes:
