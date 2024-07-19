@@ -1,3 +1,4 @@
 
 *.pyc
 saved-models/*
+pydebiaser/data/text/*
