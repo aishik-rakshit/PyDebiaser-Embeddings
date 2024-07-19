@@ -1,0 +1,11 @@
+detoxify>=0.2
+sentencepiece>=0.1.94
+torch==2.3.1
+transformers==4.16.2
+scipy==1.7.3
+scikit-learn==1.0.2
+nltk==3.7.0
+datasets==1.18.3
+accelerate==0.5.1
+wget
+gitpython
