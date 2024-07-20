@@ -526,6 +526,7 @@ class SelfDebiasGenerativeLM(GenerativeLMWrapper):
             debug=debug,
             tokenizer=self._tokenizer,
         )
+        print(self._device)
         inputs = input_texts.copy()
         for debiasing_prefix in debiasing_prefixes:
             for input_text in input_texts:
