@@ -530,7 +530,6 @@ class SelfDebiasGenerativeLM(GenerativeLMWrapper):
         for debiasing_prefix in debiasing_prefixes:
             for input_text in input_texts:
                 inputs += [debiasing_prefix + input_text]
-
         inputs = self._tokenizer.batch_encode_plus(
             inputs, padding=True, return_tensors="pt"
         )
@@ -562,7 +561,7 @@ class SelfDebiasGenerativeLM(GenerativeLMWrapper):
 
         embeddings = mean_pooling(output_ids, inputs["attention_mask"])
 
-        return embeddings[0,:].detach().cpu().numpy()
+        return embeddings[:len(input_texts),:].detach().cpu().numpy()
 
     def compute_loss(
         self, input_ids: torch.LongTensor, labels: torch.LongTensor

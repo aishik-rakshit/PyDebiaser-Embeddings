@@ -23,5 +23,5 @@ class SelfDebias:
         return prompt + ' '.join(debiased_output)
     
     def generate_embeddings(self,prompt):
-        return self.model.generate_self_debiasing_word_embeddings([prompt], debiasing_prefixe=self.bias_type)
+        return self.model.generate_self_debiasing_word_embeddings(prompt, debiasing_prefixe=self.bias_type)
     
