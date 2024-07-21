@@ -166,7 +166,7 @@ def _apply_nullspace_projection(
         classifier_class=LinearSVC,
         cls_params=classifier_parameters,
         num_classifiers=n_classifiers,
-        input_dim=768,
+        input_dim=X_train.shape[1],
         is_autoregressive=True,
         min_accuracy=0,
         X_train=X_train,

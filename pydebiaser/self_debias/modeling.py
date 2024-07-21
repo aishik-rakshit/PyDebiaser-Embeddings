@@ -551,16 +551,15 @@ class SelfDebiasGenerativeLM(GenerativeLMWrapper):
             max_length = max_length + input_length
 
         def mean_pooling(model_output, attention_mask):
-            token_embeddings = model_output[0]  # First element of model_output contains all token embeddings
+            token_embeddings = model_output[-1]  # First element of model_output contains all token embeddings
             input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
             return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
         
+
         output_ids = self._model(
-            **inputs, **kwargs
+            **inputs, **kwargs, output_hidden_states=True, return_dict=True
         )
-
-        embeddings = mean_pooling(output_ids, inputs["attention_mask"])
-
+        embeddings = mean_pooling(output_ids.hidden_states, inputs["attention_mask"])
         return embeddings[:len(input_texts),:].detach().cpu().numpy()
 
     def compute_loss(
